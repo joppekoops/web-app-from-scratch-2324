@@ -1,6 +1,10 @@
 {
     "name": "Joppe Koops",
-    "age": 21,
+    "dateOfBirth": {
+        "year": 2002,
+        "month": 3,
+        "day": 27
+    },
     "visitedCountries": [
         {
             "country": "Italy",
