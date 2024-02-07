@@ -13,12 +13,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
     </head>
 
-    <body>
+    <body class="menu-open">
         <header>
-            <button>►</button>
-            <nav>
-                <h2>About</h2>
-                <ul>
+            <button aria-controls="navigation" aria-label="toggle main navigation" aria-expended="true">►</button>
+            <nav id="navigation" aria-hidden="false">
+                <h2 id="nav-title-1">About</h2>
+                <ul aria-labeledby="nav-title-1">
                     <li>
                         <a href="">
                             <span>Joppe Koops</span>
@@ -26,8 +26,8 @@
                         </a>
                     </li>
                 </ul>
-                <h2>Visited Countries</h2>
-                <ul>
+                <h2 id="nav-title-2">Visited Countries</h2>
+                <ul aria-labeledby="nav-title-2">
                     <li>
                         <a href="" aria-current="page">
                             <span>Italy</span>
@@ -59,8 +59,8 @@
                         </a>
                     </li>
                 </ul>
-                <h2>Bucketlist Countries</h2>
-                <ul>
+                <h2 id="nav-title-3">Bucketlist Countries</h2>
+                <ul aria-labeledby="nav-title-3">
                     <li>
                         <a href="">
                             Iceland
@@ -81,7 +81,6 @@
         </header>
         <main>
             <h1>Italy</h1>
-            <img src="" alt="">
         </main>
     </body>
 

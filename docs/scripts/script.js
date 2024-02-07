@@ -20,12 +20,22 @@ getInfo();
 // mobile nav menu
 
 const navButton = document.querySelector('header button');
+const nav = document.querySelector('nav');
 const body = document.querySelector('body');
 
-
-
-navButton.onclick = () => {
+const toggleMobileNav = () => {
 
 	body.classList.toggle('menu-open');
 
+	if (body.classList.contains('menu-open')) {
+		nav.setAttribute('aria-hidden', 'false');
+		navButton.setAttribute('aria-expanded', 'true')
+	} else {
+		nav.setAttribute('aria-hidden', 'true');
+		navButton.setAttribute('aria-expanded', 'false')
+	}
+
 }
+
+navButton.addEventListener('click', toggleMobileNav);
+toggleMobileNav();
