@@ -19,23 +19,21 @@ getInfo();
 
 // mobile nav menu
 
-const navButton = document.querySelector('header button');
+const navButton = document.querySelector('header input[type="checkbox"]');
 const nav = document.querySelector('nav');
-const body = document.querySelector('body');
 
 const toggleMobileNav = () => {
 
-	body.classList.toggle('menu-open');
-
-	if (body.classList.contains('menu-open')) {
+	if (navButton.checked) {
+		navButton.setAttribute('aria-expanded', 'true');
 		nav.setAttribute('aria-hidden', 'false');
-		navButton.setAttribute('aria-expanded', 'true')
 	} else {
+		navButton.setAttribute('aria-expanded', 'false');
 		nav.setAttribute('aria-hidden', 'true');
-		navButton.setAttribute('aria-expanded', 'false')
 	}
 
 }
 
 navButton.addEventListener('click', toggleMobileNav);
+
 toggleMobileNav();

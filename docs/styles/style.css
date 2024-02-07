@@ -28,7 +28,8 @@ body {
 	color: var(--text-color);
 }
 
-body.menu-open {
+body.menu-open,
+body:has(header input[type="checkbox"]:checked) {
 	transform: translateX(0);
 }
 
@@ -124,7 +125,7 @@ nav a[aria-current] img {
 
 nav a[aria-current]:before,
 nav a[aria-current]:after,
-header button:after {
+header input[type="checkbox"]:after {
 	--outer-border-radius: calc(var(--border-radius) * 2);
 	content: "";
 	display: block;
@@ -143,13 +144,14 @@ nav a[aria-current]:before {
 }
 
 nav a[aria-current]:after,
-header button:after {
+header input[type="checkbox"]:after {
 	border-top-right-radius: var(--outer-border-radius);
 	bottom: calc(var(--outer-border-radius) * -2);
 	box-shadow: var(--outer-border-radius) calc(var(--border-radius) * -1) var(--page-color);
 }
 
-header button {
+header input[type="checkbox"] {
+	appearance: none;
 	position: absolute;
 	right: 0;
 	border-radius: var(--border-radius) 0 0 var(--border-radius);
@@ -163,6 +165,14 @@ header button {
 	font-size: 1rem;
 	cursor: pointer;
 	color: white;
+	background-image: url(../images/star-regular.svg);
+	background-size: 60%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+header input[type="checkbox"]:checked {
+	background-image: url(../images/star-solid.svg);
 }
 
 /*Main styling*/
@@ -180,7 +190,7 @@ main {
 		transform: translate(0);
 	}
 
-	header button {
+	header input[type="checkbox"] {
 		display: none;
 	}
 
