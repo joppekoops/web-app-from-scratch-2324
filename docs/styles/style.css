@@ -9,25 +9,32 @@
 :root {
 	--standard-padding: 1rem;
 	--border-radius: .5rem;
-	--background-color: white;
-	--page-color: lightgrey;
+	--background-color: #111;
+	--page-color: #333;
 	--nav-width: 16rem;
+	--text-color: white;
 }
 
 body {
 	display: grid;
 	grid-template-columns: var(--nav-width) 1fr;
 	padding: var(--standard-padding);
-	font-family: sans-serif;
+	font-family: 'Saira', arial, sans-serif;
 	background-color: var(--background-color);
 	width: 100vw;
 	overflow: hidden;
 	transform: translateX(calc(-1 * var(--nav-width) + 3rem));
 	transition: transform .2s ease-out;
+	color: var(--text-color);
 }
 
 body.menu-open {
 	transform: translateX(0);
+}
+
+h2 {
+	font-family: ;
+	font-weight: 300;
 }
 
 header {
@@ -45,6 +52,14 @@ nav {
 	padding-top: 3rem;
 }
 
+nav h2 {
+	color: var(--text-color);
+	text-transform: uppercase;
+	font-size: 1.2rem;
+	margin-top: 1rem;
+	margin-bottom: 0;
+}
+
 nav ul {
 	display: grid;
 	gap: var(--standard-padding);
@@ -54,11 +69,47 @@ nav ul {
 nav a {
 	border-radius: var(--border-radius);
 	background-color: var(--page-color);
-	padding: 1rem;
-	display: block;
+	padding: .2rem 1rem;
+	display: flex;
 	margin-right: var(--standard-padding);
 	text-decoration: none;
 	position: relative;
+	color: var(--text-color);
+	position: relative;
+	font-size: 1rem;
+	gap: 1rem;
+	align-items: center;
+}
+
+nav a img {
+	--inset: .2rem;
+	position: absolute;
+	inset: var(--inset);
+	border-radius: calc(var(--border-radius) * .8);
+	object-fit: cover;
+	overflow: hidden;
+	object-position: center;
+	width: calc(100% - var(--inset) * 2);
+	height: calc(100% - var(--inset) * 2);
+}
+
+nav a span {
+	position: relative;
+	z-index: 3;
+	margin: .8rem 0;
+	background: #fffc;
+	border-radius: var(--border-radius);
+	padding: .3em .7em;
+	color: black;
+}
+
+nav ul:first-of-type a img {
+	position: relative;
+	order: -1;
+	border-radius: 100%;
+	aspect-ratio: 1 / 1;
+	width: auto;
+	height: 2.5rem;
 }
 
 nav a[aria-current] {
@@ -67,29 +118,35 @@ nav a[aria-current] {
 	border-bottom-right-radius: 0;
 }
 
+nav a[aria-current] img {
+	right: var(--standard-padding);
+}
+
 nav a[aria-current]:before,
 nav a[aria-current]:after,
 header button:after {
+	--outer-border-radius: calc(var(--border-radius) * 2);
 	content: "";
 	display: block;
-	height: calc(var(--border-radius) * 2);
+	height: calc(var(--outer-border-radius) * 2);
 	aspect-ratio: 1 / 1;
 	background-color: var(--background-color);
 	position: absolute;
-	border-radius: var(--border-radius);
 	right: 0;
 	z-index: -1;
 }
 
 nav a[aria-current]:before {
-	top: calc(var(--border-radius) * -2);
-	box-shadow: var(--border-radius) var(--border-radius) var(--page-color);
+	border-bottom-right-radius: var(--outer-border-radius);
+	top: calc(var(--outer-border-radius) * -2);
+	box-shadow: var(--outer-border-radius) var(--border-radius) var(--page-color);
 }
 
 nav a[aria-current]:after,
 header button:after {
-	bottom: calc(var(--border-radius) * -2);
-	box-shadow: var(--border-radius) calc(var(--border-radius) * -1) var(--page-color);
+	border-top-right-radius: var(--outer-border-radius);
+	bottom: calc(var(--outer-border-radius) * -2);
+	box-shadow: var(--outer-border-radius) calc(var(--border-radius) * -1) var(--page-color);
 }
 
 header button {
@@ -105,6 +162,7 @@ header button {
 	background-color: var(--page-color);
 	font-size: 1rem;
 	cursor: pointer;
+	color: white;
 }
 
 /*Main styling*/
