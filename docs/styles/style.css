@@ -3,28 +3,46 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	/*	outline: 1px solid red;*/
 }
 
 :root {
 	--standard-padding: 1rem;
-	--border-radius: 1rem;
+	--border-radius: .5rem;
 	--background-color: white;
 	--page-color: lightgrey;
+	--nav-width: 16rem;
 }
 
 body {
 	display: grid;
-	grid-template-columns: 16rem 1fr;
+	grid-template-columns: var(--nav-width) 1fr;
 	padding: var(--standard-padding);
 	font-family: sans-serif;
 	background-color: var(--background-color);
+	width: 100vw;
+	overflow: hidden;
+	transform: translateX(calc(-1 * var(--nav-width) + 3rem));
+	transition: transform .2s ease-out;
 }
 
+body.menu-open {
+	transform: translateX(0);
+}
+
+header {
+	position: relative;
+}
 
 /*Navigation styling*/
 nav {
 	display: grid;
 	gap: var(--standard-padding);
+	position: relative;
+	max-height: calc(100vh - 2 * var(--standard-padding));
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding-top: 3rem;
 }
 
 nav ul {
@@ -45,11 +63,13 @@ nav a {
 
 nav a[aria-current] {
 	margin-right: 0;
-	border-radius: var(--border-radius) 0 0 var(--border-radius);
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
 }
 
 nav a[aria-current]:before,
-nav a[aria-current]:after {
+nav a[aria-current]:after,
+header button:after {
 	content: "";
 	display: block;
 	height: calc(var(--border-radius) * 2);
@@ -58,6 +78,7 @@ nav a[aria-current]:after {
 	position: absolute;
 	border-radius: var(--border-radius);
 	right: 0;
+	z-index: -1;
 }
 
 nav a[aria-current]:before {
@@ -65,14 +86,52 @@ nav a[aria-current]:before {
 	box-shadow: var(--border-radius) var(--border-radius) var(--page-color);
 }
 
-nav a[aria-current]:after {
+nav a[aria-current]:after,
+header button:after {
 	bottom: calc(var(--border-radius) * -2);
 	box-shadow: var(--border-radius) calc(var(--border-radius) * -1) var(--page-color);
+}
+
+header button {
+	position: absolute;
+	right: 0;
+	border-radius: var(--border-radius) 0 0 var(--border-radius);
+	width: 3rem;
+	aspect-ratio: 1 / 1;
+	display: grid;
+	place-items: center;
+	border: none;
+	z-index: 3;
+	background-color: var(--page-color);
+	font-size: 1rem;
+	cursor: pointer;
 }
 
 /*Main styling*/
 main {
 	background-color: var(--page-color);
 	border-radius: var(--border-radius);
+	border-top-left-radius: 0;
 	padding: 1rem;
+	min-height: calc(100vh - 2 * var(--standard-padding));
+	width: calc(100vw - 2 * var(--standard-padding) - 3rem);
+}
+
+@media screen and (width > 64rem) {
+	body {
+		transform: translate(0);
+	}
+
+	header button {
+		display: none;
+	}
+
+	nav {
+		padding-top: 0;
+	}
+
+	main {
+		width: 100%;
+		border-top-left-radius: var(--border-radius);
+	}
 }
