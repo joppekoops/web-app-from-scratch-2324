@@ -1,47 +1,46 @@
-import about from "./views/about.js";
+import aboutView from "./views/about.js";
+import countryView from "./views/country.js";
 
 const pathToRegex = (path) => {
 	return new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
-}
+};
 
 const getParams = (match) => {
 	const values = match.result.slice(1);
 	const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map(result => result[1]);
 
-	console.log(Array.from(match.route.path.matchAll(/:(\w+)/g)))
-}
+	return Object.fromEntries(keys.map((key, i) => {
+		return [key, values[i]];
+	}));
+};
 
 const navigateTo = (url) => {
 	history.pushState(null, null, url);
 	router();
-}
+};
 
 const router = async () => {
 
 
 	const routes = [{
 			path: '/',
-			view: about
+			view: aboutView
 		},
 		{
 			path: '/visited-countries/:id',
-			view: about
+			view: countryView
+		},
+		{
+			path: '/bucketlist-countries/:id',
+			view: countryView
 		}
-		// {
-		// 	path: '/visited-countries',
-		// 	view: () => console.log("viewing visited")
-		// },
-		// {
-		// 	path: '/bucketlist-countries',
-		// 	view: () => console.log("viewing bucketlist")
-		// }
 	];
 
 	const potentialMatches = routes.map(route => {
 		return {
 			route: route,
 			result: location.pathname.match(pathToRegex(route.path))
-		}
+		};
 	});
 
 	let match = potentialMatches.find(potentialMatch => potentialMatch.result !== null);
@@ -49,17 +48,17 @@ const router = async () => {
 	if (!match) {
 		match = {
 			route: routes[0],
-			isMatch: true
-		}
+			result: [location.pathname]
+		};
 	}
 
 	const view = new match.route.view(getParams(match));
 
 	document.querySelector('main').innerHTML = await view.getHtml();
 
-}
+};
 
-window.addEventListener('popstate', router)
+window.addEventListener('popstate', router);
 
 document.addEventListener('DOMContentLoaded', () => {
 	document.addEventListener('click', e => {
@@ -67,9 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			e.preventDefault();
 			navigateTo(e.target.href);
 		}
-	})
-	router()
-})
+	});
+	router();
+});
 
 const getInfo = () => {
 	const request = new Request("../data.json");
@@ -84,9 +83,8 @@ const getInfo = () => {
 		})
 		.then((response) => {
 			console.log(response);
-		})
-
-}
+		});
+};
 
 getInfo();
 
@@ -102,13 +100,12 @@ const toggleMobileNav = () => {
 
 	if (body.classList.contains('menu-open')) {
 		nav.setAttribute('aria-hidden', 'false');
-		navButton.setAttribute('aria-expanded', 'true')
+		navButton.setAttribute('aria-expanded', 'true');
 	} else {
 		nav.setAttribute('aria-hidden', 'true');
-		navButton.setAttribute('aria-expanded', 'false')
+		navButton.setAttribute('aria-expanded', 'false');
 	}
-
-}
+};
 
 navButton.addEventListener('click', toggleMobileNav);
 toggleMobileNav();
