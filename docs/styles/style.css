@@ -157,22 +157,18 @@ header input[type="checkbox"] {
 	border-radius: var(--border-radius) 0 0 var(--border-radius);
 	width: 3rem;
 	aspect-ratio: 1 / 1;
-	display: grid;
-	place-items: center;
-	border: none;
 	z-index: 3;
 	background-color: var(--page-color);
 	font-size: 1rem;
 	cursor: pointer;
-	color: white;
-	background-image: url(../images/star-regular.svg);
+	background-image: url(../images/bars-solid.svg);
 	background-size: 60%;
 	background-position: center;
 	background-repeat: no-repeat;
 }
 
 header input[type="checkbox"]:checked {
-	background-image: url(../images/star-solid.svg);
+	background-image: url(../images/xmark-solid.svg);
 }
 
 /*Main styling*/
