@@ -92,6 +92,7 @@ nav a img {
 	object-position: center;
 	width: calc(100% - var(--inset) * 2);
 	height: calc(100% - var(--inset) * 2);
+	pointer-events: none;
 }
 
 nav a span {
@@ -102,6 +103,7 @@ nav a span {
 	border-radius: var(--border-radius);
 	padding: .3em .7em;
 	color: black;
+	pointer-events: none;
 }
 
 nav ul:first-of-type a img {
