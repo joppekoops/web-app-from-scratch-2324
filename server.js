@@ -8,7 +8,7 @@ const app = express();
 app.use('/images', express.static(path.resolve(__dirname, 'docs', 'images')))
 app.use('/scripts', express.static(path.resolve(__dirname, 'docs', 'scripts')))
 app.use('/styles', express.static(path.resolve(__dirname, 'docs', 'styles')))
-app.use('/data.json', express.static(path.resolve(__dirname, 'docs', 'data.json')))
+app.use('/info.json', express.static(path.resolve(__dirname, 'docs', 'info.json')))
 
 app.get("/*", (req, res) => {
 	res.sendFile(path.resolve(__dirname, 'docs', 'index.html'));
