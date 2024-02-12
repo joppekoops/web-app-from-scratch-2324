@@ -1,0 +1,60 @@
+{
+    "firstName": "Joppe",
+    "lastName": "Koops",
+    "avatar_url": "https://avatars.githubusercontent.com/u/112714380?v=4",
+    "bio": "",
+    "city": "Haarlem",
+    "hobbies": "",
+    "favouriteAnimal": "",
+    "truthsAndLies": [],
+    "age": 21,
+    "visitedCountries": [
+    {
+        "country": "Italy",
+        "recommendations": ["Visit Venice with the train from Padua. It is a lot cheaper to park here and the train stops in the middle of Venice.", "Visit the little towns around Lago di Garda using the ferry to travel between them.", "Go Horsebackriding in Barco and Lochere."],
+        "rating": 5,
+        "experience": "Since I was I have been to Italy almost every summer. When I go there I always go to the same place, a little village called Barco. The village is located in the mountains of the province of Trentino. There are some beautiful places nearby like Padua, Venice and Verona. The scenery is also very beautiful.",
+        "imgUrl": ""
+    },
+    {
+        "country": "France",
+        "recommendations": ["", "", ""],
+        "rating": 4,
+        "experience": "blablabla",
+        "imgUrl": ""
+    },
+    {
+        "country": "Belgium",
+        "recommendations": ["Horsebackriding near Durbuy", "Visit Dinant", "Kayaking in the Ardennes"],
+        "rating": 5,
+        "experience": "When I went to visited Belgium, I went to the Ardennes. The Ardennes are a hilly area in the south east of Belgium that is great for outdoor sports. I did things like kayaking, horsebackriding and mountainbiking. There are also some nice places like the smallest city in the world called Durbuy.",
+        "imgUrl": ""
+    },
+    {
+        "country": "Austria",
+        "recommendations": ["For a young family the Achensee is a very nice place with a lake, easy hikes and a lot of family Hotels.", "Hiking near Sulden"],
+        "rating": 4,
+        "experience": "Austria has a lot of different types of landscapes. Near the capital the land is almost flat, while in other places the mountains are very rough. The public transport is really nice and makes it very easy to go to different places. The weather is not always nice. In the afternoon there are often thunderstorms.",
+        "imgUrl": ""
+    },
+    {
+        "country": "Switserland",
+        "recommendations": ["A nice place to go hiking is Davos. There are a lot of areal trams up the different mountains around the villages.", "Exchange your money for Swiss Francs before you go, because if you use a debit card to pay you will pay a small amount for the exchange every time you buy something.", "Buy a card for the areal trams for the whole time you are staying. It is much cheaper that way."],
+        "rating": 4,
+        "experience": "Switserland is an excellent country for hiking. There are a lot of different routes from all difficulties. What I found nice is that there is an areal tram going up to every route, so you don't have to walk the boring part under the trees. One negative is the extremely high value of the Swiss Franc. Everything is more expensive in Switserland.",
+        "imgUrl": ""
+    }],
+    "bucketList": [
+    {
+        "country": "Iceland",
+        "reason": "blablabla"
+    },
+    {
+        "country": "Finland",
+        "reason": "blablabla"
+    },
+    {
+        "country": "New Zealand",
+        "reason": "blablabla"
+    }]
+}
