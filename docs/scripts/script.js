@@ -1,6 +1,27 @@
 import aboutView from "./views/about.js";
 import countryView from "./views/country.js";
 
+let personalInfo = {};
+
+//Get personal data
+const getInfo = async () => {
+	const request = new Request("/info.json");
+
+	console.log('Getting data...')
+
+	return await fetch(request)
+		.then((response) => {
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			} else {
+				console.log('Done!')
+				return response.json();
+			}
+		});
+};
+
+
+//Frontend routing
 const pathToRegex = (path) => {
 	return new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 };
@@ -13,6 +34,12 @@ const getParams = (match) => {
 		return [key, values[i]];
 	}));
 };
+
+const changeActivePage = (pathname) => {
+	const navLinks = Array.from(document.querySelectorAll("nav a"));
+	navLinks.forEach((navLink) => navLink.removeAttribute("aria-current"));
+	navLinks.find(navLink => navLink.href.includes(pathname)).setAttribute("aria-current", "page");
+}
 
 const navigateTo = (url) => {
 	history.pushState(null, null, url);
@@ -52,7 +79,9 @@ const router = async () => {
 		};
 	}
 
-	const view = new match.route.view(getParams(match));
+	changeActivePage(location.pathname);
+
+	const view = new match.route.view(getParams(match), personalInfo);
 
 	document.querySelector('main').innerHTML = await view.getHtml();
 
@@ -60,33 +89,19 @@ const router = async () => {
 
 window.addEventListener('popstate', router);
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 	document.addEventListener('click', e => {
 		if (e.target.matches("[data-link]")) {
 			e.preventDefault();
 			navigateTo(e.target.href);
 		}
 	});
+
+	personalInfo = await getInfo();
+
 	router();
 });
 
-const getInfo = () => {
-	const request = new Request("../data.json");
-
-	fetch(request)
-		.then((response) => {
-			if (!response.ok) {
-				throw new Error(`HTTP error! Status: ${response.status}`);
-			} else {
-				return response.json();
-			}
-		})
-		.then((response) => {
-			console.log(response);
-		});
-};
-
-getInfo();
 
 // mobile nav menu
 

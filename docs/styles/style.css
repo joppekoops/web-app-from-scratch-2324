@@ -179,8 +179,19 @@ main {
 	border-radius: var(--border-radius);
 	border-top-left-radius: 0;
 	padding: 1rem;
-	min-height: calc(100vh - 2 * var(--standard-padding));
+	max-height: calc(100vh - 2 * var(--standard-padding));
+	overflow-x: hidden;
+	overflow-y: auto;
 	width: calc(100vw - 2 * var(--standard-padding) - 3rem);
+}
+
+.rating {
+	heigth: 2em;
+	display: flex;
+}
+
+.rating img {
+	height: 2em;
 }
 
 @media screen and (width > 64rem) {
