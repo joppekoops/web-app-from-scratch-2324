@@ -1,4 +1,4 @@
-import abstractView from "./abstractView.js";
+import abstractView from './abstractView.js';
 
 export default class extends abstractView {
 	constructor(params, data) {
@@ -19,7 +19,7 @@ export default class extends abstractView {
 
 			for (let i = 0; i < 5; i++) {
 				if (i < rating) { //add as many filled stars as the rating
-					element += '<img src="/images/star-solid.svg" alt""/>';
+					element += '<img src="/images/star-solid.svg" alt=""/>';
 				} else { //complement with empty stars until there are five
 					element += '<img src="/images/star-regular.svg" alt=""/>';
 				}
@@ -28,13 +28,22 @@ export default class extends abstractView {
 			element += '</div>';
 
 			return element;
-		}
+		};
 
 		return `
 			<h1>${country.country}</h1>
-			<h2>Experience</h2>
-			${ratingToStars(country.rating)}
-			<p>${country.experience}</p>
+			<section class="experience">
+				<div class="title-bar">
+					<h2>My experience</h2>
+					${ratingToStars(country.rating)}
+				</div>
+				<p>${country.experience}</p>
+				<img src="${country.imgUrl}" alt=""/>
+			</section>
+			<section class="recommendations">
+				<h2>Recommendations</h2>
+				${this.arrayToList(country.recommendations)}
+			</section>
 		`;
 	}
 }

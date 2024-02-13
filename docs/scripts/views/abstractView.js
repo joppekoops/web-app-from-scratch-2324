@@ -8,7 +8,14 @@ export default class {
 		document.title = title;
 	}
 
+	arrayToList(array) {
+		let element = '<ul>';
+		array.forEach(item => element += `<li>${item}</li>`);
+		element += '</ul>';
+		return element;
+	}
+
 	async getHtml() {
-		return "";
+		return '';
 	}
 }

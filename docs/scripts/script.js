@@ -1,11 +1,20 @@
-import aboutView from "./views/about.js";
-import countryView from "./views/country.js";
+import aboutView from './views/about.js';
+import countryView from './views/country.js';
+
+const addLoader = () => {
+	console.log('Loading...')
+	const main = document.querySelector('main');
+	const loader = document.createElement('div');
+	loader.classList.add('loader');
+	main.appendChild(loader);
+}
 
 let personalInfo = {};
 
 //Get personal data
 const getInfo = async () => {
-	const request = new Request("/info.json");
+
+	const request = new Request('/info.json');
 
 	return await fetch(request)
 		.then((response) => {
@@ -19,6 +28,58 @@ const getInfo = async () => {
 
 //Source: https://developer.mozilla.org/en-US/docs/Web/API/fetch
 
+const firstLetterUppercase = (string) => {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const nav = document.querySelector('nav');
+
+const createNavTitle = (title) => {
+	let element = document.createElement('h2');
+	element.textContent = title;
+	return element;
+}
+
+const createNavItem = (url, linkText, imgUrl) => {
+	let element = document.createElement('li');
+	let link = document.createElement('a');
+	let img = document.createElement('img');
+	let span = document.createElement('span');
+	link.setAttribute('data-link', '');
+	link.href = url;
+	span.textContent = linkText;
+	img.src = imgUrl;
+	link.appendChild(span);
+	link.appendChild(img);
+	element.appendChild(link);
+	return element;
+}
+
+const buildNav = () => {
+	nav.innerHTML = '';
+
+	nav.appendChild(createNavTitle('About'));
+
+	let aboutList = document.createElement('ul');
+	aboutList.appendChild(createNavItem('/', personalInfo.firstName + personalInfo.lastName, personalInfo.avatar_url));
+	nav.appendChild(aboutList);
+
+	nav.appendChild(createNavTitle('Visited Countries'));
+
+	let visitedCountriesList = document.createElement('ul');
+	personalInfo.visitedCountries.forEach(country => {
+		visitedCountriesList.appendChild(createNavItem('/visited-countries/' + country.country.toLowerCase(), country.country, country.imgUrl));
+	});
+	nav.appendChild(visitedCountriesList);
+
+	nav.appendChild(createNavTitle('Bucketlist Countries'));
+
+	let bucketlistCountriesList = document.createElement('ul');
+	personalInfo.bucketList.forEach(country => {
+		bucketlistCountriesList.appendChild(createNavItem('/bucketlist-countries/' + country.country.toLowerCase(), country.country, country.imgUrl));
+	});
+	nav.appendChild(bucketlistCountriesList);
+}
 
 //Frontend routing
 
@@ -32,7 +93,7 @@ https://www.youtube.com/watch?v=OstALBk-jTc
 
 // Make regular expression from path to match to the url
 const pathToRegex = (path) => {
-	return new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
+	return new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$');
 };
 
 // Create an object from all the parameters in the url
@@ -47,10 +108,10 @@ const getParams = (match) => {
 
 // Function to update the active page in the navigation menu
 const changeActivePage = (pathname) => {
-	const navLinks = Array.from(document.querySelectorAll("nav a"));
-	navLinks.forEach((navLink) => navLink.removeAttribute("aria-current"));
-	navLinks.find(navLink => navLink.href.includes(pathname)).setAttribute("aria-current", "page");
-}
+	const navLinks = Array.from(document.querySelectorAll('nav a'));
+	navLinks.forEach((navLink) => navLink.removeAttribute('aria-current'));
+	navLinks.find(navLink => navLink.href.includes(pathname)).setAttribute('aria-current', 'page');
+};
 
 // Add url to browser history so navigation like the back and next button still work
 const navigateTo = (url) => {
@@ -112,17 +173,21 @@ window.addEventListener('popstate', router);
 // Event listener for DOMContentLoaded event, initializes routing and retrieves personal data
 document.addEventListener('DOMContentLoaded', async () => {
 
-	// Add click event to all links with data-link attribute to prevent them from reloading the page
-	document.addEventListener('click', e => {
-		if (e.target.matches("[data-link]")) {
-			e.preventDefault();
-			navigateTo(e.target.href);
-		}
-	});
+	addLoader();
 
 	// Fetch personal data before the first page loads so the data is available
 	// After fist page load the data stays the same
 	personalInfo = await getInfo();
+
+	buildNav();
+
+	// Add click event to all links with data-link attribute to prevent them from reloading the page
+	document.addEventListener('click', e => {
+		if (e.target.matches('[data-link]')) {
+			e.preventDefault();
+			navigateTo(e.target.href);
+		}
+	});
 
 	//Load the first page after the DOM has loaded
 	router();
@@ -132,7 +197,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Navigation menu toggle
 
 const navButton = document.querySelector('header input[type="checkbox"]');
-const nav = document.querySelector('nav');
 
 // Function to toggle aria values of the navigation menu
 // The actual visibility is done with a checkbox and :has selector in CSS
