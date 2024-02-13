@@ -7,16 +7,20 @@ export default class extends abstractView {
 	}
 
 	async getHtml() {
+		//Make the frist letter uppercase
 		const countryName = this.params.id.charAt(0).toUpperCase() + this.params.id.slice(1);
+
+		//Find the country with the same name as the parameter in the URL
 		const country = this.data.visitedCountries.find(country => country.country === countryName);
 
+		//Function for creating a div with stars from the rating
 		const ratingToStars = (rating) => {
 			let element = '<div class="rating">';
 
 			for (let i = 0; i < 5; i++) {
-				if (i < rating) {
+				if (i < rating) { //add as many filled stars as the rating
 					element += '<img src="/images/star-solid.svg" alt""/>';
-				} else {
+				} else { //complement with empty stars until there are five
 					element += '<img src="/images/star-regular.svg" alt=""/>';
 				}
 			}

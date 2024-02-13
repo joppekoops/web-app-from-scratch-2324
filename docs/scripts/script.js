@@ -7,25 +7,35 @@ let personalInfo = {};
 const getInfo = async () => {
 	const request = new Request("/info.json");
 
-	console.log('Getting data...')
-
 	return await fetch(request)
 		.then((response) => {
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			} else {
-				console.log('Done!')
 				return response.json();
 			}
 		});
 };
 
+//Source: https://developer.mozilla.org/en-US/docs/Web/API/fetch
+
 
 //Frontend routing
+
+/*
+
+Tutorials used for routing:
+https://www.youtube.com/watch?v=6BozpmSjk-Y
+https://www.youtube.com/watch?v=OstALBk-jTc
+
+*/
+
+// Make regular expression from path to match to the url
 const pathToRegex = (path) => {
 	return new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 };
 
+// Create an object from all the parameters in the url
 const getParams = (match) => {
 	const values = match.result.slice(1);
 	const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map(result => result[1]);
@@ -35,20 +45,22 @@ const getParams = (match) => {
 	}));
 };
 
+// Function to update the active page in the navigation menu
 const changeActivePage = (pathname) => {
 	const navLinks = Array.from(document.querySelectorAll("nav a"));
 	navLinks.forEach((navLink) => navLink.removeAttribute("aria-current"));
 	navLinks.find(navLink => navLink.href.includes(pathname)).setAttribute("aria-current", "page");
 }
 
+// Add url to browser history so navigation like the back and next button still work
 const navigateTo = (url) => {
-	history.pushState(null, null, url);
+	history.pushState( /*state*/ null, /*title*/ null, /*url*/ url);
 	router();
 };
 
 const router = async () => {
 
-
+	//array of all the routes with their view class and parameters
 	const routes = [{
 			path: '/',
 			view: aboutView
@@ -63,15 +75,19 @@ const router = async () => {
 		}
 	];
 
+	//test each route if it matches the pathname/url
 	const potentialMatches = routes.map(route => {
+		// return object with all routes and if they match the pathname
 		return {
 			route: route,
 			result: location.pathname.match(pathToRegex(route.path))
 		};
 	});
 
+	//find what route matched
 	let match = potentialMatches.find(potentialMatch => potentialMatch.result !== null);
 
+	//if no match is found (match = undefined), go to the homepage (the first route)
 	if (!match) {
 		match = {
 			route: routes[0],
@@ -79,17 +95,24 @@ const router = async () => {
 		};
 	}
 
+	// Change the menu link that gets the active style
 	changeActivePage(location.pathname);
 
+	// Make new instance of the routes' view
 	const view = new match.route.view(getParams(match), personalInfo);
 
+	// Add the HTML from the view in the main
 	document.querySelector('main').innerHTML = await view.getHtml();
 
 };
 
+// Event listener for handling browser navigation events
 window.addEventListener('popstate', router);
 
+// Event listener for DOMContentLoaded event, initializes routing and retrieves personal data
 document.addEventListener('DOMContentLoaded', async () => {
+
+	// Add click event to all links with data-link attribute to prevent them from reloading the page
 	document.addEventListener('click', e => {
 		if (e.target.matches("[data-link]")) {
 			e.preventDefault();
@@ -97,17 +120,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 		}
 	});
 
+	// Fetch personal data before the first page loads so the data is available
+	// After fist page load the data stays the same
 	personalInfo = await getInfo();
 
+	//Load the first page after the DOM has loaded
 	router();
 });
 
 
-// mobile nav menu
+// Navigation menu toggle
 
 const navButton = document.querySelector('header input[type="checkbox"]');
 const nav = document.querySelector('nav');
 
+// Function to toggle aria values of the navigation menu
+// The actual visibility is done with a checkbox and :has selector in CSS
 const toggleMobileNav = () => {
 
 	if (navButton.checked) {
@@ -119,6 +147,8 @@ const toggleMobileNav = () => {
 	}
 };
 
+// Event listener for toggling mobile navigation menu
 navButton.addEventListener('click', toggleMobileNav);
 
+// Close nav menu on first page load because it is open by default in case the javascript is disabled
 toggleMobileNav();

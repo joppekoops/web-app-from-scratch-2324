@@ -3,14 +3,17 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	/*	outline: 1px solid red;*/
 }
 
 :root {
 	--standard-padding: 1rem;
+	/* padding and gaps in the nav and around everything */
 	--border-radius: .5rem;
+	/* all corners are based on this */
 	--background-color: #111;
+	/* behind the whole page */
 	--page-color: #333;
+	/* used for the page and nav links */
 	--nav-width: 16rem;
 	--text-color: white;
 }
@@ -31,6 +34,7 @@ body {
 body.menu-open,
 body:has(header input[type="checkbox"]:checked) {
 	transform: translateX(0);
+	/*When the menu is open the whole page moves back to the right*/
 }
 
 h2 {
@@ -115,6 +119,7 @@ nav ul:first-of-type a img {
 	height: 2.5rem;
 }
 
+/* style the current nav link */
 nav a[aria-current] {
 	margin-right: 0;
 	border-top-right-radius: 0;
@@ -152,8 +157,14 @@ header input[type="checkbox"]:after {
 	box-shadow: var(--outer-border-radius) calc(var(--border-radius) * -1) var(--page-color);
 }
 
+/* The before and after create the inside radii. They have a shadow in the page color and the background-color as background*/
+/* Source: https://www.youtube.com/watch?v=SkML640BcoA */
+
+/* Navigation toggle */
 header input[type="checkbox"] {
 	appearance: none;
+	/* Don't use standard checkbox styling. */
+	/* Source: weekly nerd by Kilian Valkhof */
 	position: absolute;
 	right: 0;
 	border-radius: var(--border-radius) 0 0 var(--border-radius);
@@ -171,6 +182,7 @@ header input[type="checkbox"] {
 
 header input[type="checkbox"]:checked {
 	background-image: url(../images/xmark-solid.svg);
+	/* Different background images for :checked stated (menu is open)*/
 }
 
 /*Main styling*/
@@ -183,6 +195,7 @@ main {
 	overflow-x: hidden;
 	overflow-y: auto;
 	width: calc(100vw - 2 * var(--standard-padding) - 3rem);
+	/* The width of the page without padding width on both sides and without 3rem to show a bit of the nav */
 }
 
 .rating {
@@ -194,7 +207,11 @@ main {
 	height: 2em;
 }
 
+
+/* Desktop styling */
 @media screen and (width > 64rem) {
+
+	/* Menu always visible, so no transfrom, no checkbox, and main just takes the rest of the space */
 	body {
 		transform: translate(0);
 	}
