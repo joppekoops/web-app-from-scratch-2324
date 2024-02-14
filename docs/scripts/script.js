@@ -1,13 +1,13 @@
 import aboutView from './views/about.js';
-import countryView from './views/country.js';
+import visitedCountryView from './views/visitedCountry.js';
+import bucketlistCountryView from './views/bucketlistCountry.js';
 
 const addLoader = () => {
-	console.log('Loading...')
 	const main = document.querySelector('main');
 	const loader = document.createElement('div');
 	loader.classList.add('loader');
 	main.appendChild(loader);
-}
+};
 
 let personalInfo = {};
 
@@ -30,7 +30,7 @@ const getInfo = async () => {
 
 const firstLetterUppercase = (string) => {
 	return string.charAt(0).toUpperCase() + string.slice(1);
-}
+};
 
 const nav = document.querySelector('nav');
 
@@ -38,7 +38,7 @@ const createNavTitle = (title) => {
 	let element = document.createElement('h2');
 	element.textContent = title;
 	return element;
-}
+};
 
 const createNavItem = (url, linkText, imgUrl) => {
 	let element = document.createElement('li');
@@ -49,11 +49,12 @@ const createNavItem = (url, linkText, imgUrl) => {
 	link.href = url;
 	span.textContent = linkText;
 	img.src = imgUrl;
+	img.alt = '';
 	link.appendChild(span);
 	link.appendChild(img);
 	element.appendChild(link);
 	return element;
-}
+};
 
 const buildNav = () => {
 	nav.innerHTML = '';
@@ -68,7 +69,7 @@ const buildNav = () => {
 
 	let visitedCountriesList = document.createElement('ul');
 	personalInfo.visitedCountries.forEach(country => {
-		visitedCountriesList.appendChild(createNavItem('/visited-countries/' + country.country.toLowerCase(), country.country, country.imgUrl));
+		visitedCountriesList.appendChild(createNavItem('/visited-countries/' + country.country.toLowerCase().replace(' ', '-'), country.country, country.imgUrl));
 	});
 	nav.appendChild(visitedCountriesList);
 
@@ -76,10 +77,10 @@ const buildNav = () => {
 
 	let bucketlistCountriesList = document.createElement('ul');
 	personalInfo.bucketList.forEach(country => {
-		bucketlistCountriesList.appendChild(createNavItem('/bucketlist-countries/' + country.country.toLowerCase(), country.country, country.imgUrl));
+		bucketlistCountriesList.appendChild(createNavItem('/bucketlist-countries/' + country.country.toLowerCase().replace(' ', '-'), country.country, country.imgUrl));
 	});
 	nav.appendChild(bucketlistCountriesList);
-}
+};
 
 //Frontend routing
 
@@ -128,11 +129,11 @@ const router = async () => {
 		},
 		{
 			path: '/visited-countries/:id',
-			view: countryView
+			view: visitedCountryView
 		},
 		{
 			path: '/bucketlist-countries/:id',
-			view: countryView
+			view: bucketlistCountryView
 		}
 	];
 

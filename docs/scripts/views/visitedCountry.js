@@ -8,10 +8,10 @@ export default class extends abstractView {
 
 	async getHtml() {
 		//Make the frist letter uppercase
-		const countryName = this.params.id.charAt(0).toUpperCase() + this.params.id.slice(1);
+		const countryName = this.params.id.replace('-', ' ');
 
 		//Find the country with the same name as the parameter in the URL
-		const country = this.data.visitedCountries.find(country => country.country === countryName);
+		const country = this.data.visitedCountries.find(country => country.country.toLowerCase() === countryName);
 
 		//Function for creating a div with stars from the rating
 		const ratingToStars = (rating) => {
@@ -38,7 +38,7 @@ export default class extends abstractView {
 					${ratingToStars(country.rating)}
 				</div>
 				<p>${country.experience}</p>
-				<img src="${country.imgUrl}" alt=""/>
+				<img src="${country.imgUrl}" alt="${country.imgAlt}"/>
 			</section>
 			<section class="recommendations">
 				<h2>Recommendations</h2>

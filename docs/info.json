@@ -2,11 +2,12 @@
     "firstName": "Joppe",
     "lastName": "Koops",
     "avatar_url": "https://avatars.githubusercontent.com/u/112714380?v=4",
+    "avatar_alt": "Joppe behind a computer",
     "bio": "👨‍💻 Frontend developer<br>🎥 Filmmaker",
     "city": "Haarlem",
     "hobbies": ["filmmaking", "cooking", "horsebackriding", "playing piano"],
     "favouriteAnimal": "horse",
-    "truthsAndLies": [],
+    "truthsAndLies": ["I visited a town that has the same name as me.", "I went on holiday to Spain.", "I have a rabbit."],
     "age": 21,
     "visitedCountries": [
     {
@@ -14,50 +15,58 @@
         "recommendations": ["Visit Venice with the train from Padua. It is a lot cheaper to park here and the train stops in the middle of Venice.", "Visit the little towns around Lago di Garda using the ferry to travel between them.", "Go Horsebackriding in Barco and Lochere."],
         "rating": 5,
         "experience": "Since I was I have been to Italy almost every summer. When I go there I always go to the same place, a little village called Barco. The village is located in the mountains of the province of Trentino. There are some beautiful places nearby like Padua, Venice and Verona. The scenery is also very beautiful.",
-        "imgUrl": "https://storage.googleapis.com/erudite-imprint-214919.appspot.com/wafs/italy.webp"
+        "imgUrl": "https://storage.googleapis.com/erudite-imprint-214919.appspot.com/wafs/italy.webp",
+        "imgAlt": "Colorful houses next to lake Garda in Italy."
     },
     {
         "country": "France",
         "recommendations": ["", "", ""],
         "rating": 4,
         "experience": "blablabla",
-        "imgUrl": "https://storage.googleapis.com/erudite-imprint-214919.appspot.com/wafs/france.webp"
+        "imgUrl": "https://storage.googleapis.com/erudite-imprint-214919.appspot.com/wafs/france.webp",
+        "imgAlt": "Colorful houses in a street in France."
     },
     {
         "country": "Belgium",
         "recommendations": ["Horsebackriding near Durbuy", "Visit Dinant", "Kayaking in the Ardennes"],
         "rating": 5,
         "experience": "When I went to visited Belgium, I went to the Ardennes. The Ardennes are a hilly area in the south east of Belgium that is great for outdoor sports. I did things like kayaking, horsebackriding and mountainbiking. There are also some nice places like the smallest city in the world called Durbuy.",
-        "imgUrl": "https://storage.googleapis.com/erudite-imprint-214919.appspot.com/wafs/belgium.webp"
+        "imgUrl": "https://storage.googleapis.com/erudite-imprint-214919.appspot.com/wafs/belgium.webp",
+        "imgAlt": "Joppe on a horse in Belgium. There are more people on horses in a line in front and behind him."
     },
     {
         "country": "Austria",
         "recommendations": ["For a young family the Achensee is a very nice place with a lake, easy hikes and a lot of family Hotels.", "Hiking near Sulden"],
         "rating": 4,
         "experience": "Austria has a lot of different types of landscapes. Near the capital the land is almost flat, while in other places the mountains are very rough. The public transport is really nice and makes it very easy to go to different places. The weather is not always nice. In the afternoon there are often thunderstorms.",
-        "imgUrl": "https://storage.googleapis.com/erudite-imprint-214919.appspot.com/wafs/austria.webp"
+        "imgUrl": "https://storage.googleapis.com/erudite-imprint-214919.appspot.com/wafs/austria.webp",
+        "imgAlt": "Blue lake in the mountains of Austria"
     },
     {
         "country": "Switzerland",
         "recommendations": ["A nice place to go hiking is Davos. There are a lot of areal trams up the different mountains around the villages.", "Exchange your money for Swiss Francs before you go, because if you use a debit card to pay you will pay a small amount for the exchange every time you buy something.", "Buy a card for the areal trams for the whole time you are staying. It is much cheaper that way."],
         "rating": 4,
         "experience": "Switzerland is an excellent country for hiking. There are a lot of different routes from all difficulties. What I found nice is that there is an areal tram going up to every route, so you don't have to walk the boring part under the trees. One negative is the extremely high value of the Swiss Franc. Everything is more expensive in Switzerland.",
-        "imgUrl": "https://storage.googleapis.com/erudite-imprint-214919.appspot.com/wafs/switzerland.webp"
+        "imgUrl": "https://storage.googleapis.com/erudite-imprint-214919.appspot.com/wafs/switzerland.webp",
+        "imgAlt": "Joppe on a stone with a view of the Swiss alps in the background."
     }],
     "bucketList": [
     {
         "country": "Iceland",
-        "reason": "blablabla",
-        "imgUrl": ""
+        "reason": "I think Iceland is a country you just have to visit. I always see beautiful photos on social media, now I just want to take photos and videos there myself.",
+        "imgUrl": "https://storage.googleapis.com/erudite-imprint-214919.appspot.com/wafs/iceland.webp",
+        "imgAlt": "High waterfall in mossy landscape in Iceland."
     },
     {
         "country": "Finland",
-        "reason": "blablabla",
-        "imgUrl": ""
+        "reason": "I don't like the warm summers of more Southern countries in the summer. Finland is cool in the summer and there is a lot of nice lakes and large pine forests. I think it would be a very nice place for a quiet holiday.",
+        "imgUrl": "https://storage.googleapis.com/erudite-imprint-214919.appspot.com/wafs/finland.webp",
+        "imgAlt": "Large lakes with pine forests on the side in Finland."
     },
     {
         "country": "New Zealand",
-        "reason": "blablabla",
-        "imgUrl": ""
+        "reason": "After I saw the beautiful shots from the Lord of the Rings and the Hobbit movies, I just want to see the landscapes for myself.",
+        "imgUrl": "https://storage.googleapis.com/erudite-imprint-214919.appspot.com/wafs/new-zealand.webp",
+        "imgAlt": "Lake and mountains in New Zealand."
     }]
 }

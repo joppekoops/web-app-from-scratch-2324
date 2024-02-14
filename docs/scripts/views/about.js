@@ -12,7 +12,7 @@ export default class extends abstractView {
 				<div class="profile">
 					<p>${this.data.firstName} ${this.data.lastName}</p> 
 					<p>📍<adress>${this.data.city}<adress></p>
-					<img src="${this.data.avatar_url}" alt="">
+					<img src="${this.data.avatar_url}" alt="${this.data.avatar_alt}">
 				</div>
 				<h2>Bio</h2>
 				<p>${this.data.bio}</p>
