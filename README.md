@@ -1,5 +1,7 @@
 # Web App From Scratch @cmda-minor-web 2023 - 2024
 
+![Screenshot of the app](./readme-images/app.webp)
+
 ## 📝 Beschrijving
 Ik heb een ***single page application (SPA)*** gemaakt, met de focus op *front-end JavaScript*. Centraal staat de ***front-end router***, die in de achtergrond de nieuwe pagina ophaald, waardoor de website niet hoeft te herladen.
 
@@ -57,7 +59,7 @@ export default class extends abstractView {
 }
 ```
 
-- ### **Dynamische navigatie opbouw**
+- ### 🏗️ **Dynamische navigatie opbouw**
 De navigatie colom aan de linkerkant van de pagina word door de *JavaScript* opgebouwd op basis van welke data er beschikbaar is. Hierdoor kan er gemakkelijk een pagina worden toegevoegd of verwijderd in de `info.json`. Die verschijnt dan vanzelf op de pagina.
 
 De structuur van de pagina wordt wel bepaald in de *JavaScript*. Hier zijn een aantal functies om bijvoorbeeld een titel toe te voegen of een lijstje met navigatie onderdelen.
@@ -144,7 +146,7 @@ De lijstjes in de navigatie heb ik een ```aria-labelledby``` gegeven. Later gaf 
 
 ![Screenshot van Error: Attribute aria-labeledby not allowed on element ul at this point.](./readme-images/list-label-error.webp)
 
-### *Front-end router* maken
+### 🗺️ *Front-end router* maken
 Voor de *front-end router* heb ik twee YouTube *tutorials* gevolgd. Dit ging heel makelijk. De problemen kwamen meer daarna, toen ik er zelf mee verder moest. Daarvoor moest ik eerst beter begrijpen hoe de *router* precies werkt. Ik heb de *tutorials* nog een keer gekeken om de uitleg nog een keer door te nemen. Daarbij heb ik *comments* bij mijn code gemaakt om later terug te kunnen lezen.
 
 Het grootste probleem was het invullen van mijn data in de verschillende *views*. Elke keer als ik de data binnen haalde kreeg ik de *promise* terug in plaats van de data.
@@ -186,7 +188,7 @@ Nu kon ik de data gebruiken in de view. Bijvoorbeeld hier:
 const country = this.data.visitedCountries.find(country => country.country === countryName);
 ```
 
-### Beetje *back-end*
+### 🥵 Beetje *back-end*
 Bij de *front-end router* hoort een klein beetje *back-end* om er voor te zorgen dat alle routes bij `index.html` uit te laten komen. In de tutorial werd dit gedaan met *Node.js*, maar mijn app draait in *Github pages*. Omdat dit draait op *jekyll* (*Ruby package*) zou het mogelijk zijn om daar wat configuratie voor op te zetten, zoals volgens dit antwoord op *Stack overflow*: https://stackoverflow.com/questions/29390425/github-pages-url-rewrite-support
 
 Ik heb dit een aantal keer geprobeerd met behulp van artikelen van Github zelf.
@@ -200,7 +202,7 @@ Hierbij kreeg ik steeds errors dat de ene package een andere versie van een ande
 
 Na één dag uitproberen heb ik het opgegeven en heb ik het met *Node.js* gedaan. De website wordt nu gehost in *app engine* in *Google cloud*.
 
-### Navigatie bouwen met JS
+### 🏗️ Navigatie bouwen met JS
 Om de navigatie te verbeteren wilde ik die opbouwen met *JavaScript* op basis van de data in mijn `info.json`. Hierdoor is de nav altijd *up-to-date* met mijn landen, als ik die ooit bijwerkt.
 
 Hiervoor heb ik mijn lijstje aangepast naar:
@@ -208,7 +210,7 @@ Hiervoor heb ik mijn lijstje aangepast naar:
 2. De data opslaan
 3. Navigatie bouwen
 4. De route vinden
-5. De view van de route laden met de data
+5. De *view* van de route laden met de data
 
 De code werd nu:
 
@@ -242,9 +244,21 @@ let aboutList = document.createElement('ul');
 
 Ook staat dit nu nog in de `script.js`. Dit zou ik graag in een aparte *class* hebben.
 
-## Wensen lijst
+### Simpele laad status toevoegen
+Afhankelijk van je internet snelheid kan het een tijdje duren voordat de pagina geladen is. Tijdens dat dit gebeurt wilde ik daarom een laad status toevoegen. In de HTML heb ik een simpel skelet van de pagina gezet. Wanneer de data begint met laden wordt er een draaiende cirkel toegevoegd. Die wordt daarna vervangen met de content. Mijn lijstje kreeg hierdoor nog een extra stap:
 
-## Bronnen
+1. Lader toevoegen aan de pagina
+2. De data ophalen
+3. De data opslaan
+4. Navigatie bouwen
+5. De route vinden
+6. De *view* van de route laden met de data
+
+## ✅ Wensen lijst
+- [ ] Nu ik een router heb gebouwd zou een volgende stap zijn om ook de voordelen te gebruiken met bijvoorbeeld overgangen tussen de verschillende *views*.
+- [ ] Wat nog moet gebeuren is de code een stuk netter maken. Verschillende functionaliteiten kunnen in verschillende bestanden worden gezet die kunnen worden geïmporteerd.
+
+## ℹ️ Bronnen
 - Kevin Powell. (2024, 11 januari). Create a clean, modern navigation with HTML & CSS [Video]. YouTube. https://www.youtube.com/watch?v=SkML640BcoA
 - Results of labeling lists (and list items!) | scottohara.me. (2023, 24 maart). https://www.scottohara.me/blog/2020/05/02/labelled-lists.html
 -dcode. (2020a, augustus 24). Build a Single Page Application with JavaScript (No Frameworks) [Video]. YouTube. https://www.youtube.com/watch?v=6BozpmSjk-Y
