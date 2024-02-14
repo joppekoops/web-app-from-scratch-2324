@@ -1,51 +1,114 @@
 # Web App From Scratch @cmda-minor-web 2023 - 2024
 
-In dit vak gaan we een web applicatie bouwen en leren hoe deze werken door zo min mogelijk libraries, frameworks of
-andere bronnen te importen (vanilla) en zoveel mogelijk het browser platform te gebruiken door middel van HTML, CSS &
-JavaScript.    
-Het eindresultaat is een modulaire, single page web app (SPA), beoordeeld op jouw niveau en eigen leerdoelen.    
-De bedoeling is om een web app te bouwen die data ophaalt van een externe API, deze manipuleert om te tonen in de UI van
-de App, hoe abstract dan ook.
-Je gaat bekende patterns leren toe passen bij het bouwen en testen van de applicatie voor een eigen "WebSite" en een
-gezamenlijke "Team App".
-Nog nooit heb je zo snel kunnen prototypen als nadat je hebt leren werken met de browser en haar talen.
-Daarnaast zal je tijdloze kennis opdoen over het de aard en het gebruik van data, datastructuren, algoritmes, libraries,
-frameworks en de werking van het web.
+## Beschrijving
+Ik heb een ***single page application (SPA)*** gemaakt, met de focus op *front-end JavaScript*. Centraal staat de ***front-end router***, die in de achtergrond de nieuwe pagina ophaald, waardoor de website niet hoeft te herladen.
 
-## Assignment
-1. Bouw je eigen SPA/WebSite met externe data van een API, minimaal 1 micro interactie.
-2. Een TeamApp met een verzameling van alle losse websites van je teamleden
+In de applicatie is informatie over mijzelf te zien, een aantal landen waar ik geweest ben en een aantal landen waar ik nog graag heen wil. Per land staat mijn beleving en aanbevelingen of de reden waarom ik er graag heen wil.
 
----
+Ja kan mijn wep app *live* vinden op https://wafs-dot-erudite-imprint-214919.ew.r.appspot.com/
 
-## Program
+## *Features*
+- ### ***Frond-end routing***
+In plaats van dat de *routing* door de *back-end* wordt gedaan, zoals meestal het geval is, wordt in deze app alle *routing* in de *front-end* gedaan. Behalve dan dat in de *back-end* alle pagina's naar ```index.html``` worden gestuurd.
 
-| Planning | Maandag               | Dinsdag                | Woensdag                           | Donderdag                   | Vrijdag                                   |
-|----------|-----------------------|------------------------|------------------------------------|-----------------------------|-------------------------------------------|
-|          | Kick-Off, Dev WebSite | Dev TeamApp, Workshops | Dev *, Weekly nerd                 | Dev *, Workshops            | Code review, Voortgangsgesprekken, Dev *  |
-|          | Dev *, Workshops      | College + Workshops    | Dev *, Weekly nerd, Deadline 23:59 | Mondeling, Weekly Nerd Blog | Reparatiegesprekken, Afsluiting, 🍻 Fest? |
+Het **voordeel** hiervan is dat de pagina niet hoeft te herladen om nieuwe data voor de pagina op te halen.
 
-## Rubric
+Een **nadeel** is wel dat het niet *progressively enhanced* is en dus niet werkt als de *JavaScript* niet wordt geladen.
 
-Je inzet wordt beoordeeld met behulp van de rubric (zie hieronder). Je moet het criterium (middenkolom) behalen om het
-vak te voltooien.
-Tijdens de toets wordt je mondeling overhoord en krijg je feedback over dingen die we denken dat tekort schieten en dingen die
-we denken dat een verbetering zijn op het criterium.
+Alle *routes* worden aangegeven in een *array*. Daarbij kunnen parameters aangegeven worden met een ```:```. Bij elke *route* staat een bijhorende view die bestaat uit een *JavaScript class*.
 
-TBA
+*Array*:
 
-[//]: # ()
-[//]: # (| Deficiency | Criterion                                                                                                                                                                              | Improvement |)
+```js
+const routes = [{
+			path: '/',
+			view: aboutView
+		},
+		{
+			path: '/visited-countries/:id',
+			view: visitedCountryView
+		},
+		{
+			path: '/bucketlist-countries/:id',
+			view: bucketlistCountryView
+		}
+	];
+```
 
-[//]: # (|:-----------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------|)
+Voorbeeld *class*:
 
-[//]: # (|            | *User Interface* - you design, build and test the user interface by applying interface design principles                                                                               |             |)
+```js
+import abstractView from './abstractView.js';
 
-[//]: # (|            | *Code structure* - you write modular, consistent and efficient HTML, CSS and JavaScript code by applying structure and best practices. You manage state for the application and the UI |             |)
+export default class extends abstractView {
+	constructor(params, data) {
+		super(params, data);
+		this.setTitle(this.params.id);
+	}
 
-[//]: # (|            | *Data management* - you understand how you can work with an external API using asynchronous code. You can retrieve data, manipulate and dynamically convert it to structured html      |             |)
+	// HTML toevoegen aan de main
 
-[//]: # (|            | *Project* - your app is working and published on GitHub Pages. Your project is thoroughly documented in the `README.md` file in your repository.                                       |             |)
+	async getHtml() {
+		return `
+			<h1>${this.data.title}</h1>
+			<p>${this.data.text}</p>
+		`;
+	}
+}
+```
+
+- ### **Dynamische navigatie opbouw**
+De navigatie colom aan de linkerkant van de pagina word door de *JavaScript* opgebouwd op basis van welke data er beschikbaar is. Hierdoor kan er gemakkelijk een pagina worden toegevoegd of verwijderd in de `info.json`. Die verschijnt dan vanzelf op de pagina.
+
+De structuur van de pagina wordt wel bepaald in de *JavaScript*. Hier zijn een aantal functies om bijvoorbeeld een titel toe te voegen of een lijstje met navigatie onderdelen.
+
+```js
+const buildNav = () => {
+	
+	//Titel toevoegen
+
+	nav.appendChild(createNavTitle('Visited Countries'));
+
+	//Lijst maken met alle bezochte landen
+
+	let visitedCountriesList = document.createElement('ul');
+	personalInfo.visitedCountries.forEach(country => {
+		visitedCountriesList.appendChild(createNavItem('/visited-countries/' + country.country.toLowerCase(), country.country, country.imgUrl));
+	});
+	nav.appendChild(visitedCountriesList);
+}
+```
+
+- ### *Progressively enhanced* navigatie met *checkbox*
+Op kleinere schermen schuift de navigatie aan de linker kant een stukje het scherm uit zodat er genoeg ruimte is voor de inhoud. Dit gebeurt doormiddel van een *checkbox*. Op deze manier is er geen *JavaScript* nodig om deze functionaliteit te laten werken.
+Als de *checkbox* in de main een ```:checked``` status heeft, wordt de navigatie open geklapt. De standaard *checkbox* vormgeving is verwijderd met ```appearance: none;```;
+
+## Data
+Alle data is opgeslagen in `docs/info.json`. Hierdoor staat alle content bij elkaar. De data wordt in een keer opgehaald als je app voor de eerste keer wordt geladen. De data wordt dan opgeslagen in de variable ```personalInfo```. In plaats van elke keer de data opnieuw van de server op te vragen, is het veel sneller om deze variabele te gebruiken.
+
+## Installatie
+Mijn app gebruikt een beetje *Node.js* in de *back-end*. Om de app de draaien zal je dus Node geinstalleerd moeten hebben. https://nodejs.org/en/download
+
+*Clone* de app van *Github* met:
+```
+git clone https://github.com/joppekoops/web-app-from-scratch-2324.git
+```
+
+Installeer de *node packages* met:
+```
+npm i
+```
+
+En start vervolgens de app met:
+```
+npm start
+```
+
+## Proces
+
+## Wensen lijst
+
+## Bronnen
 
 <!-- Add a link to your live demo in Github Pages 🌐-->
 
