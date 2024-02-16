@@ -71,6 +71,7 @@ body {
 	font-family: 'Saira', arial, sans-serif;
 	background-color: var(--background-color);
 	width: 100vw;
+	height: 100svh;
 	overflow: hidden;
 	transform: translateX(calc(-1 * var(--nav-width) + 3rem));
 	transition: transform .2s ease-out;
@@ -96,7 +97,7 @@ nav {
 	display: grid;
 	gap: var(--standard-padding);
 	position: relative;
-	max-height: calc(100vh - 2 * var(--standard-padding));
+	max-height: calc(100svh - 2 * var(--standard-padding));
 	overflow-x: hidden;
 	overflow-y: auto;
 	padding-top: 3rem;
@@ -237,7 +238,7 @@ main {
 	border-radius: var(--border-radius);
 	border-top-left-radius: 0;
 	padding: 2rem max(1rem, 5vw);
-	height: calc(100vh - 2 * var(--standard-padding));
+	height: calc(100svh - 2 * var(--standard-padding));
 	overflow-x: hidden;
 	overflow-y: auto;
 	width: calc(100vw - 2 * var(--standard-padding) - 3rem);
